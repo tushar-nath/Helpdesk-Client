@@ -8,8 +8,9 @@ function ProtectedPage() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "http:localhost:3000/api/v1/protected"
+          "http://localhost:3000/api/v1/protected"
         );
+        console.log(response.data);
         setUserData(response.data.data);
       } catch (error) {
         console.error("Error occurred while fetching data:", error);
