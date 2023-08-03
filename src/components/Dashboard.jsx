@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
+import Board from "./Board";
 
 function Dashboard() {
   const [user, setUser] = useState(null);
@@ -29,17 +30,9 @@ function Dashboard() {
   }, []);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="max-w-md w-full bg-white p-8 shadow-lg rounded-md">
-        <h1 className="text-3xl font-bold mb-6">Dashboard</h1>
-        {user ? (
-          <div>
-            <p>Name: {user.name}</p>
-            <p>Email: {user.email}</p>
-          </div>
-        ) : (
-          <p>Loading user data...</p>
-        )}
+    <div className="min-h-screen items-center justify-center bg-gray-100">
+      <div className="container mx-auto">
+        <Board />
       </div>
     </div>
   );
