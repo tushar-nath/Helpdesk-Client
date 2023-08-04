@@ -12,7 +12,7 @@ function Login() {
         <h1 className="text-3xl font-bold mb-6">Login Page</h1>
         <button
           onClick={handleLogin}
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          className="bg-black border hover:bg-white hover:text-black hover:border-3 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
         >
           Login with Google
         </button>
