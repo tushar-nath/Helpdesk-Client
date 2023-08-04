@@ -3,9 +3,11 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import Board from "./Board";
 import ProjectDetailKanbanBoard from "./KanbanBoard/ProjectDetailKanbanBoard";
+import { ClipLoader } from "react-spinners";
 
 function Dashboard() {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   //COLUMNS
   const columns = [
@@ -71,20 +73,33 @@ function Dashboard() {
         })
         .then((response) => {
           setUser(response.data);
+          setLoading(false); // Set loading to false when data is fetched
         })
         .catch((error) => {
           console.error("Error fetching user data:", error);
+          setLoading(false); // Set loading to false even if there's an error
         });
     }
   }, []);
+
+  if (loading) {
+    // Show the loading spinner while waiting for the API call to complete
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-100">
+        <ClipLoader color="black" loading={loading} size={50} />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen items-center justify-center bg-gray-100">
       <div className="container mx-auto py-8">
         {/* PROJECT KANBAN BOARD */}
-        <p className="text-black text-2xl font-semibold">
-          Welcome, {user.name}
-        </p>
+        {user && (
+          <p className="text-black text-2xl font-semibold">
+            Welcome, {user.name} !
+          </p>
+        )}
         <ProjectDetailKanbanBoard columns={columns} projectId={project.id} />
       </div>
     </div>
