@@ -35,7 +35,7 @@ export default function ProjectDetailKanbanBoard({ columns, projectId }) {
     setBoardColumns([
       {
         id: "0",
-        title: "To Do",
+        title: "In Queue",
         tasks: [
           {
             id: "0",
@@ -46,6 +46,18 @@ export default function ProjectDetailKanbanBoard({ columns, projectId }) {
             status: "Medium",
             taskColumn: "0",
             dueDate: new Date("09-29-2023"),
+            projectId: "1",
+            reporterId: "1",
+          },
+          {
+            id: "3",
+            assigneeId: "4",
+            title: "Competitor Analysis",
+            description:
+              "Analyze competitor's marketing strategies and identify gaps.",
+            status: "Low",
+            taskColumn: "0",
+            dueDate: new Date("09-30-2023"),
             projectId: "1",
             reporterId: "1",
           },
@@ -67,12 +79,55 @@ export default function ProjectDetailKanbanBoard({ columns, projectId }) {
             projectId: "1",
             reporterId: "1",
           },
+          {
+            id: "4",
+            assigneeId: "5",
+            title: "Design Prototypes",
+            description:
+              "Create design prototypes for the selected creative concept.",
+            status: "High",
+            taskColumn: "1",
+            dueDate: new Date("10-05-2023"),
+            projectId: "1",
+            reporterId: "1",
+          },
         ],
       },
       {
         id: "2",
-        title: "Done",
-        tasks: [],
+        title: "Escalated",
+        tasks: [
+          {
+            id: "2",
+            assigneeId: "6",
+            title: "Resource Allocation",
+            description:
+              "Allocate necessary resources for the campaign implementation.",
+            status: "High",
+            taskColumn: "2",
+            dueDate: new Date("09-30-2023"),
+            projectId: "1",
+            reporterId: "1",
+          },
+        ],
+      },
+      {
+        id: "3",
+        title: "Resolved",
+        tasks: [
+          {
+            id: "5",
+            assigneeId: "7",
+            title: "Campaign Launch",
+            description:
+              "Launch the marketing campaign and monitor initial performance.",
+            status: "High",
+            taskColumn: "3",
+            dueDate: new Date("10-10-2023"),
+            projectId: "1",
+            reporterId: "1",
+          },
+        ],
       },
     ]);
   };
