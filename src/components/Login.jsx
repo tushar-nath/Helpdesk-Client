@@ -1,9 +1,11 @@
 import React from "react";
 
+const base_url = process.env.REACT_APP_API_BASE_URL;
+
 function Login() {
   const handleLogin = () => {
     // Redirect to the Google OAuth URL
-    window.location.href = "http://localhost:3000/api/v1/auth/google";
+    window.location.href = `${base_url}/api/v1/auth/google`;
   };
 
   return (

@@ -5,6 +5,8 @@ import Board from "./Board";
 import ProjectDetailKanbanBoard from "./KanbanBoard/ProjectDetailKanbanBoard";
 import { ClipLoader } from "react-spinners";
 
+const base_url = process.env.REACT_APP_API_BASE_URL;
+
 function Dashboard() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -66,7 +68,7 @@ function Dashboard() {
       Cookies.set("jwt_token", token, { expires: 1 });
       // Call the API to get user data
       axios
-        .get("http://localhost:3000/api/v1/api/user", {
+        .get(`${base_url}/api/v1/api/user`, {
           headers: {
             Authorization: token,
           },
