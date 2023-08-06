@@ -6,7 +6,7 @@ const dotColorVariants = {
   "Asset Allocation": "bg-[#15DD4D]",
   "Client Request": "bg-[#FFCE00]",
   Onboarding: "bg-[#00BFFF]",
-  "Change Request": "bg-[#FFD700]",
+  "Change Request": "bg-[#00D4FF]",
   Marketing: "bg-[#FF5733]",
 };
 
@@ -16,7 +16,7 @@ const textColorVariants = {
   "Asset Allocation": "text-[#15DD4D]",
   "Client Request": "text-[#FFCE00]",
   Onboarding: "text-[#00BFFF]",
-  "Change Request": "text-[#FFD700]",
+  "Change Request": "text-[#00D4FF]",
   Marketing: "text-[#FF5733]",
 };
 
@@ -26,7 +26,7 @@ const bgColorVariants = {
   "Asset Allocation": "bg-[#15DD4D]/20",
   "Client Request": "bg-[#FFCE00]/20",
   Onboarding: "bg-[#00BFFF]/20",
-  "Change Request": "bg-[#FFD700]/20",
+  "Change Request": "bg-[#00D4FF]/20",
   Marketing: "bg-[#FF5733]/20",
 };
 
