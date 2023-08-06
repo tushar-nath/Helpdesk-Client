@@ -6,8 +6,30 @@ import {
   DropResult,
 } from "react-beautiful-dnd";
 import ProjectDetailTasks from "./ProjectDetailTasks";
+import CreateTask from "./CreateTask";
 
 export default function ProjectDetailKanbanBoard({ columns, projectId }) {
+  const [showCreateTaskModal, setShowCreateTaskModal] = useState(false);
+
+  const handleToggleCreateTaskModal = () => {
+    setShowCreateTaskModal((prev) => !prev);
+  };
+
+  const handleSaveNewTask = (newTask) => {
+    // Perform any additional logic, such as saving the task to the database
+    // and updating the boardColumns state with the new task.
+
+    // For now, let's add a fake ID and taskColumn.
+    newTask.id = "fake_id"; // Replace with a real ID from the server
+    newTask.taskColumn = "0"; // Replace with the desired column ID
+
+    // Add the new task to the "In Queue" column
+    const updatedBoardColumns = boardColumns.map((col) =>
+      col.id === "0" ? { ...col, tasks: [...col.tasks, newTask] } : col
+    );
+
+    setBoardColumns(updatedBoardColumns);
+  };
   //SAVE A DEEP COPY OF COLUMNS PROP
   const [boardColumns, setBoardColumns] = useState(
     JSON.parse(JSON.stringify(columns))
@@ -241,9 +263,20 @@ export default function ProjectDetailKanbanBoard({ columns, projectId }) {
         {boardColumns &&
           boardColumns.length &&
           boardColumns.map((col) => (
-            <ProjectDetailTasks key={col.id} column={col} />
+            <ProjectDetailTasks
+              key={col.id}
+              column={col}
+              handleToggleCreateTaskModal={handleToggleCreateTaskModal}
+            />
           ))}
       </div>
+      {/* Render the CreateTask modal */}
+      {showCreateTaskModal && (
+        <CreateTask
+          onClose={handleToggleCreateTaskModal}
+          onSave={handleSaveNewTask}
+        />
+      )}
     </DragDropContext>
   );
 }
