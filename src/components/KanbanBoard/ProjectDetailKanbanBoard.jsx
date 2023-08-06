@@ -125,7 +125,7 @@ export default function ProjectDetailKanbanBoard({ columns, projectId }) {
             title: "Resource Allocation",
             description:
               "Allocate necessary resources for the campaign implementation.",
-            status: "AssetAllocation",
+            status: "Asset Allocation",
             taskColumn: "2",
             dueDate: new Date("09-30-2023"),
             projectId: "1",
@@ -137,7 +137,7 @@ export default function ProjectDetailKanbanBoard({ columns, projectId }) {
             title: "Client Request Handling",
             description:
               "Handle client's request for additional features and services.",
-            status: "ClientRequest",
+            status: "Client Request",
             taskColumn: "2",
             dueDate: new Date("10-02-2023"),
             projectId: "1",

@@ -6,8 +6,24 @@ const CreateTask = ({ onClose, onSave }) => {
   const [description, setDescription] = useState("");
   const [status, setStatus] = useState("");
   const [dueDate, setDueDate] = useState("");
+  const [error, setError] = useState("");
+  const ticketTypes = [
+    "Grievance",
+    "Reimbursement",
+    "Asset Allocation",
+    "Client Request",
+    "Onboarding",
+    "Change Request",
+    "Marketing",
+  ];
 
   const handleSave = () => {
+    // Perform validation to check if all the required fields are filled
+    if (!title || !description || !status || !dueDate) {
+      setError("Please fill out all the necessary fields.");
+      return;
+    }
+
     onSave({
       title,
       description,
@@ -27,8 +43,11 @@ const CreateTask = ({ onClose, onSave }) => {
       overlayClassName="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50"
     >
       <h2 className="text-xl font-bold mb-4">Create New Task</h2>
+      {error && <p className="text-red-600 mb-4">{error}</p>}
       <div className="mb-4">
-        <label className="block font-medium">Title:</label>
+        <label className="block font-medium">
+          Title<span className="text-red-500">*</span>:
+        </label>
         <input
           className="w-full border border-gray-300 px-3 py-2 rounded-md focus:outline-none focus:border-blue-500"
           type="text"
@@ -37,7 +56,9 @@ const CreateTask = ({ onClose, onSave }) => {
         />
       </div>
       <div className="mb-4">
-        <label className="block font-medium">Description:</label>
+        <label className="block font-medium">
+          Description<span className="text-red-500">*</span>:
+        </label>
         <textarea
           className="w-full border border-gray-300 px-3 py-2 rounded-md focus:outline-none focus:border-blue-500"
           value={description}
@@ -45,16 +66,26 @@ const CreateTask = ({ onClose, onSave }) => {
         />
       </div>
       <div className="mb-4">
-        <label className="block font-medium">Status:</label>
-        <input
+        <label className="block font-medium">
+          Ticket Type<span className="text-red-500">*</span>:
+        </label>
+        <select
           className="w-full border border-gray-300 px-3 py-2 rounded-md focus:outline-none focus:border-blue-500"
-          type="text"
           value={status}
           onChange={(e) => setStatus(e.target.value)}
-        />
+        >
+          <option value="">Select Ticket Type</option>
+          {ticketTypes.map((type) => (
+            <option key={type} value={type}>
+              {type}
+            </option>
+          ))}
+        </select>
       </div>
       <div className="mb-4">
-        <label className="block font-medium">Due Date:</label>
+        <label className="block font-medium">
+          Due Date<span className="text-red-500">*</span>:
+        </label>
         <input
           className="w-full border border-gray-300 px-3 py-2 rounded-md focus:outline-none focus:border-blue-500"
           type="date"
@@ -77,4 +108,5 @@ const CreateTask = ({ onClose, onSave }) => {
     </Modal>
   );
 };
+
 export default CreateTask;

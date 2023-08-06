@@ -3,30 +3,30 @@ import React from "react";
 const dotColorVariants = {
   Grievance: "bg-[#FF4848]",
   Reimbursement: "bg-[#FF8B48]",
-  AssetAllocation: "bg-[#15DD4D]",
-  ClientRequest: "bg-[#FFCE00]",
+  "Asset Allocation": "bg-[#15DD4D]",
+  "Client Request": "bg-[#FFCE00]",
   Onboarding: "bg-[#00BFFF]",
-  ChangeRequest: "bg-[#FFD700]",
+  "Change Request": "bg-[#FFD700]",
   Marketing: "bg-[#FF5733]",
 };
 
 const textColorVariants = {
   Grievance: "text-[#FF4848]",
   Reimbursement: "text-[#FF8B48]",
-  AssetAllocation: "text-[#15DD4D]",
-  ClientRequest: "text-[#FFCE00]",
+  "Asset Allocation": "text-[#15DD4D]",
+  "Client Request": "text-[#FFCE00]",
   Onboarding: "text-[#00BFFF]",
-  ChangeRequest: "text-[#FFD700]",
+  "Change Request": "text-[#FFD700]",
   Marketing: "text-[#FF5733]",
 };
 
 const bgColorVariants = {
   Grievance: "bg-[#E32121]/20",
   Reimbursement: "bg-[#FF8B48]/20",
-  AssetAllocation: "bg-[#15DD4D]/20",
-  ClientRequest: "bg-[#FFCE00]/20",
+  "Asset Allocation": "bg-[#15DD4D]/20",
+  "Client Request": "bg-[#FFCE00]/20",
   Onboarding: "bg-[#00BFFF]/20",
-  ChangeRequest: "bg-[#FFD700]/20",
+  "Change Request": "bg-[#FFD700]/20",
   Marketing: "bg-[#FF5733]/20",
 };
 
