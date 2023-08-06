@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
-import Board from "./Board";
 import ProjectDetailKanbanBoard from "./KanbanBoard/ProjectDetailKanbanBoard";
 import { ClipLoader } from "react-spinners";
 
@@ -15,7 +14,7 @@ function Dashboard() {
   const columns = [
     {
       id: "0",
-      title: "To Do",
+      title: "To Queue",
       tasks: [],
     },
     {
@@ -24,8 +23,13 @@ function Dashboard() {
       tasks: [],
     },
     {
-      id: "2",
-      title: "Done",
+      id: "3",
+      title: "Escalated",
+      tasks: [],
+    },
+    {
+      id: "4",
+      title: "Resolved",
       tasks: [],
     },
   ];

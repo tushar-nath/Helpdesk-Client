@@ -1,21 +1,33 @@
 import React from "react";
 
 const dotColorVariants = {
-  High: "bg-[#FF4848]",
-  Medium: "bg-[#FF8B48]",
-  Low: "bg-[#15DD4D]",
+  Grievance: "bg-[#FF4848]",
+  Reimbursement: "bg-[#FF8B48]",
+  AssetAllocation: "bg-[#15DD4D]",
+  ClientRequest: "bg-[#FFCE00]",
+  Onboarding: "bg-[#00BFFF]",
+  ChangeRequest: "bg-[#FFD700]",
+  Marketing: "bg-[#FF5733]",
 };
 
 const textColorVariants = {
-  High: "text-[#FF4848]",
-  Medium: "text-[#FF8B48]",
-  Low: "text-[#15DD4D]",
+  Grievance: "text-[#FF4848]",
+  Reimbursement: "text-[#FF8B48]",
+  AssetAllocation: "text-[#15DD4D]",
+  ClientRequest: "text-[#FFCE00]",
+  Onboarding: "text-[#00BFFF]",
+  ChangeRequest: "text-[#FFD700]",
+  Marketing: "text-[#FF5733]",
 };
 
 const bgColorVariants = {
-  High: "bg-[#E32121]/20",
-  Medium: "bg-[#FF8B48]/20",
-  Low: "bg-[#15DD4D]/20",
+  Grievance: "bg-[#E32121]/20",
+  Reimbursement: "bg-[#FF8B48]/20",
+  AssetAllocation: "bg-[#15DD4D]/20",
+  ClientRequest: "bg-[#FFCE00]/20",
+  Onboarding: "bg-[#00BFFF]/20",
+  ChangeRequest: "bg-[#FFD700]/20",
+  Marketing: "bg-[#FF5733]/20",
 };
 
 export default function PriorityTag({ priority }) {

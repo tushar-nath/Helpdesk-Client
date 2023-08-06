@@ -38,24 +38,24 @@ export default function ProjectDetailKanbanBoard({ columns, projectId }) {
         title: "In Queue",
         tasks: [
           {
-            id: "0",
-            assigneeId: "2",
-            title: "Research and Strategy",
-            description:
-              "Conduct market research on the target audience's skincare preferences, buying behavior. Longer text.",
-            status: "Medium",
-            taskColumn: "0",
-            dueDate: new Date("09-29-2023"),
-            projectId: "1",
-            reporterId: "1",
-          },
-          {
             id: "3",
             assigneeId: "4",
             title: "Competitor Analysis",
             description:
               "Analyze competitor's marketing strategies and identify gaps.",
-            status: "Low",
+            status: "Marketing",
+            taskColumn: "0",
+            dueDate: new Date("09-30-2023"),
+            projectId: "1",
+            reporterId: "1",
+          },
+          {
+            id: "6",
+            assigneeId: "8",
+            title: "Client Grievance",
+            description:
+              "Handle client grievance related to billing and payments.",
+            status: "Grievance",
             taskColumn: "0",
             dueDate: new Date("09-30-2023"),
             projectId: "1",
@@ -68,26 +68,26 @@ export default function ProjectDetailKanbanBoard({ columns, projectId }) {
         title: "In Progress",
         tasks: [
           {
-            id: "1",
-            assigneeId: "3",
-            title: "Creative Development",
-            description:
-              "Brainstorm and present multiple creative concepts for the campaign.",
-            status: "Medium",
-            taskColumn: "1",
-            dueDate: new Date("09-29-2023"),
-            projectId: "1",
-            reporterId: "1",
-          },
-          {
             id: "4",
             assigneeId: "5",
             title: "Design Prototypes",
             description:
               "Create design prototypes for the selected creative concept.",
-            status: "High",
+            status: "Grievance",
             taskColumn: "1",
             dueDate: new Date("10-05-2023"),
+            projectId: "1",
+            reporterId: "1",
+          },
+          {
+            id: "7",
+            assigneeId: "9",
+            title: "Reimbursement Processing",
+            description:
+              "Process reimbursement requests from clients and employees.",
+            status: "Reimbursement",
+            taskColumn: "1",
+            dueDate: new Date("10-07-2023"),
             projectId: "1",
             reporterId: "1",
           },
@@ -103,9 +103,21 @@ export default function ProjectDetailKanbanBoard({ columns, projectId }) {
             title: "Resource Allocation",
             description:
               "Allocate necessary resources for the campaign implementation.",
-            status: "High",
+            status: "AssetAllocation",
             taskColumn: "2",
             dueDate: new Date("09-30-2023"),
+            projectId: "1",
+            reporterId: "1",
+          },
+          {
+            id: "8",
+            assigneeId: "10",
+            title: "Client Request Handling",
+            description:
+              "Handle client's request for additional features and services.",
+            status: "ClientRequest",
+            taskColumn: "2",
+            dueDate: new Date("10-02-2023"),
             projectId: "1",
             reporterId: "1",
           },
@@ -116,14 +128,14 @@ export default function ProjectDetailKanbanBoard({ columns, projectId }) {
         title: "Resolved",
         tasks: [
           {
-            id: "5",
-            assigneeId: "7",
-            title: "Campaign Launch",
+            id: "9",
+            assigneeId: "11",
+            title: "Marketing Analytics",
             description:
-              "Launch the marketing campaign and monitor initial performance.",
-            status: "High",
+              "Analyze marketing campaign performance and provide insights.",
+            status: "Marketing",
             taskColumn: "3",
-            dueDate: new Date("10-10-2023"),
+            dueDate: new Date("10-15-2023"),
             projectId: "1",
             reporterId: "1",
           },
