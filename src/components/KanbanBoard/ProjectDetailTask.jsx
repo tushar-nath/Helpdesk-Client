@@ -27,9 +27,10 @@ export default function ProjectDetailTask({
         }}
         className={`mb-[17px] min-h-[60px]`}
       >
-        {haveEllipsis && taskDescription.length > 90
-          ? taskDescription.slice(0, 86) + "..."
-          : taskDescription}
+        {taskDescription &&
+          (haveEllipsis && taskDescription.length > 90
+            ? taskDescription.slice(0, 86) + "..."
+            : taskDescription)}
       </p>
 
       {/* PRIORITY */}

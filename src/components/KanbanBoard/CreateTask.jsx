@@ -24,14 +24,38 @@ const CreateTask = ({ onClose, onSave }) => {
       return;
     }
 
-    onSave({
+    // Create a new task object with the data to be saved
+    const newTask = {
       title,
       description,
       status,
       dueDate,
-    });
+    };
 
-    onClose();
+    // Make the API call to save the new task
+    fetch("http://localhost:3000/api/v1/tickets", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newTask),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Failed to save the task.");
+        }
+        // Assuming the API responds with the saved task data, you can parse the response as JSON
+        return response.json();
+      })
+      .then((savedTaskData) => {
+        // Pass the saved task data to the onSave callback to handle it in the parent component if needed
+        onSave(savedTaskData);
+        onClose(); // Close the modal after saving
+      })
+      .catch((error) => {
+        setError("An error occurred while saving the task.");
+        console.error(error);
+      });
   };
 
   return (
