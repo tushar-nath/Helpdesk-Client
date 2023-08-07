@@ -1,6 +1,8 @@
 import { useState } from "react";
 import Modal from "react-modal";
 
+const base_url = process.env.REACT_APP_API_BASE_URL;
+
 const CreateTask = ({ onClose, onSave }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -33,7 +35,7 @@ const CreateTask = ({ onClose, onSave }) => {
     };
 
     // Make the API call to save the new task
-    fetch("http://localhost:3000/api/v1/tickets", {
+    fetch(`${base_url}/api/v1/tickets`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
