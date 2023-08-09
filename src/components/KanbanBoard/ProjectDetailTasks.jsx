@@ -5,6 +5,7 @@ import { Droppable, Draggable } from "react-beautiful-dnd";
 export default function ProjectDetailTasks({
   column,
   handleToggleCreateTaskModal,
+  handleTaskClick,
 }) {
   return (
     <div
@@ -38,6 +39,7 @@ export default function ProjectDetailTasks({
                         ref={provided.innerRef}
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}
+                        onClick={() => handleTaskClick(task)}
                       >
                         <ProjectDetailTask
                           key={index}

@@ -7,11 +7,20 @@ import {
 } from "react-beautiful-dnd";
 import ProjectDetailTasks from "./ProjectDetailTasks";
 import CreateTask from "./CreateTask";
+import EditTaskModal from "./EditTaskModal";
 
 const base_url = process.env.REACT_APP_API_BASE_URL;
 
 export default function ProjectDetailKanbanBoard({ columns, projectId }) {
   const [showCreateTaskModal, setShowCreateTaskModal] = useState(false);
+  const [selectedTask, setSelectedTask] = useState(null);
+  const [showEditTaskModal, setShowEditTaskModal] = useState(false);
+
+  const handleTaskClick = (task) => {
+    console.log("Clicked on task:", task);
+    setSelectedTask(task);
+    setShowEditTaskModal(true);
+  };
 
   const handleToggleCreateTaskModal = () => {
     setShowCreateTaskModal((prev) => !prev);
@@ -286,6 +295,7 @@ export default function ProjectDetailKanbanBoard({ columns, projectId }) {
               key={col.id}
               column={col}
               handleToggleCreateTaskModal={handleToggleCreateTaskModal}
+              handleTaskClick={handleTaskClick}
             />
           ))}
       </div>
@@ -294,6 +304,13 @@ export default function ProjectDetailKanbanBoard({ columns, projectId }) {
         <CreateTask
           onClose={handleToggleCreateTaskModal}
           onSave={handleSaveNewTask}
+        />
+      )}
+      {showEditTaskModal && (
+        <EditTaskModal
+          isOpen={showEditTaskModal}
+          onClose={() => setShowEditTaskModal(false)}
+          selectedTask={selectedTask}
         />
       )}
     </DragDropContext>
