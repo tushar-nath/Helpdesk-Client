@@ -3,11 +3,13 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import ProjectDetailKanbanBoard from "./KanbanBoard/ProjectDetailKanbanBoard";
 import { ClipLoader } from "react-spinners";
+import { useContext } from "react";
+import { useUserContext } from "./contexts/UserContext";
 
 const base_url = process.env.REACT_APP_API_BASE_URL;
 
 function Dashboard() {
-  const [user, setUser] = useState(null);
+  const { user, setUser } = useUserContext();
   const [loading, setLoading] = useState(true);
 
   //COLUMNS
@@ -101,11 +103,6 @@ function Dashboard() {
     <div className="min-h-screen items-center justify-center bg-gray-100">
       <div className="container mx-auto py-8">
         {/* PROJECT KANBAN BOARD */}
-        {user && (
-          <p className="text-black text-2xl font-semibold">
-            Welcome, {user.name} !
-          </p>
-        )}
         <ProjectDetailKanbanBoard columns={columns} projectId={project.id} />
       </div>
     </div>
