@@ -1,5 +1,7 @@
 import { useState } from "react";
 import Modal from "react-modal";
+import { showToast } from "react-next-toast";
+import { ClipLoader } from "react-spinners";
 
 const base_url = process.env.REACT_APP_API_BASE_URL;
 
@@ -18,6 +20,7 @@ const CreateTask = ({ onClose, onSave }) => {
     "Change Request",
     "Marketing",
   ];
+  const [loading, setLoading] = useState(false);
 
   const handleSave = () => {
     // Perform validation to check if all the required fields are filled
@@ -26,6 +29,7 @@ const CreateTask = ({ onClose, onSave }) => {
       return;
     }
 
+    setLoading(true);
     // Create a new task object with the data to be saved
     const newTask = {
       title,
@@ -51,11 +55,15 @@ const CreateTask = ({ onClose, onSave }) => {
       })
       .then((savedTaskData) => {
         // Pass the saved task data to the onSave callback to handle it in the parent component if needed
+        setLoading(false);
         onSave(savedTaskData);
+        showToast.success("Created a task successfully!");
         onClose(); // Close the modal after saving
       })
       .catch((error) => {
         setError("An error occurred while saving the task.");
+        setLoading(false);
+        showToast.error(`Couldn't create task. Please try again later! `, 400);
         console.error(error);
       });
   };
@@ -123,7 +131,13 @@ const CreateTask = ({ onClose, onSave }) => {
         className="rounded-[5px] bg-[#141414] text-white py-2 px-4 rounded-md mr-2"
         onClick={handleSave}
       >
-        Save
+        {loading ? (
+          <div style={{ position: "relative", top: "3px" }}>
+            <ClipLoader size={16} color={"#ffffff"} />
+          </div>
+        ) : (
+          "Save"
+        )}
       </button>
       <button
         className="bg-gray-300 text-gray-700 py-2 px-4 rounded-md"
