@@ -26,13 +26,6 @@ export default function ProjectDetailKanbanBoard({ columns, projectId }) {
   };
 
   const handleSaveNewTask = (newTask) => {
-    // Perform any additional logic, such as saving the task to the database
-    // and updating the boardColumns state with the new task.
-
-    // For now, let's add a fake ID and taskColumn.
-    // newTask.id = "fake_id"; // Replace with a real ID from the server
-    // newTask.taskColumn = "0"; // Replace with the desired column ID
-
     newTask.savedTicket.id = newTask.savedTicket._id;
     // Add the new task to the "In Queue" column
     const updatedBoardColumns = boardColumns.map((col) =>
