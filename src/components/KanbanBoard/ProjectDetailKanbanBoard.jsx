@@ -17,7 +17,6 @@ export default function ProjectDetailKanbanBoard({ columns, projectId }) {
   const [showEditTaskModal, setShowEditTaskModal] = useState(false);
 
   const handleTaskClick = (task) => {
-    console.log("Clicked on task:", task);
     setSelectedTask(task);
     setShowEditTaskModal(true);
   };
@@ -49,18 +48,47 @@ export default function ProjectDetailKanbanBoard({ columns, projectId }) {
     JSON.parse(JSON.stringify(columns))
   );
 
+  // FUNCTION TO UPDATE EXISTING TASK
+  const handleUpdateTask = (updatedTask) => {
+    // Find the column and task index using the original task ID
+    const columnIndex = boardColumns.findIndex((col) =>
+      col.tasks.some((task) => task.id === updatedTask.savedTicket._id)
+    );
+
+    if (columnIndex !== -1) {
+      const taskIndex = boardColumns[columnIndex].tasks.findIndex(
+        (task) => task.id === updatedTask.savedTicket._id
+      );
+
+      if (taskIndex !== -1) {
+        // Update the task properties
+        const updatedColumns = boardColumns.map((col, index) =>
+          index === columnIndex
+            ? {
+                ...col,
+                tasks: col.tasks.map((task) =>
+                  task.id === updatedTask.savedTicket._id
+                    ? { ...task, ...updatedTask.savedTicket }
+                    : task
+                ),
+              }
+            : col
+        );
+
+        setBoardColumns(updatedColumns);
+      }
+    }
+  };
+
   //FUNCTION TO SYNC COLUMNS WITH DATABASE
   const syncColumnsWithDb = (projectId) => {
     //GET THE DEEP COPY OF COLUMNS PROP
     const updatedBoardColumns = JSON.parse(JSON.stringify(columns));
-    console.log(updatedBoardColumns);
 
     // Fetch the data from the API using the project ID
     fetch(`${base_url}/api/v1/tickets`)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
-
         // Update the _id property to id for each task in the columns array
         const updatedColumns = data.columns.map((column) => ({
           ...column,
@@ -73,118 +101,6 @@ export default function ProjectDetailKanbanBoard({ columns, projectId }) {
       .catch((error) => {
         console.error("Error fetching data:", error);
       });
-
-    //FAKE DATA
-    // setBoardColumns([
-    //   {
-    //     id: "0",
-    //     title: "In Queue",
-    //     tasks: [
-    //       {
-    //         id: "3",
-    //         assigneeId: "4",
-    //         title: "Competitor Analysis",
-    //         description:
-    //           "Analyze competitor's marketing strategies and identify gaps.",
-    //         status: "Marketing",
-    //         taskColumn: "0",
-    //         dueDate: new Date("09-30-2023"),
-    //         projectId: "1",
-    //         reporterId: "1",
-    //       },
-    //       {
-    //         id: "6",
-    //         assigneeId: "8",
-    //         title: "Client Grievance",
-    //         description:
-    //           "Handle client grievance related to billing and payments.",
-    //         status: "Grievance",
-    //         taskColumn: "0",
-    //         dueDate: new Date("09-30-2023"),
-    //         projectId: "1",
-    //         reporterId: "1",
-    //       },
-    //     ],
-    //   },
-    //   {
-    //     id: "1",
-    //     title: "In Progress",
-    //     tasks: [
-    //       {
-    //         id: "4",
-    //         assigneeId: "5",
-    //         title: "Design Prototypes",
-    //         description:
-    //           "Create design prototypes for the selected creative concept.",
-    //         status: "Grievance",
-    //         taskColumn: "1",
-    //         dueDate: new Date("10-05-2023"),
-    //         projectId: "1",
-    //         reporterId: "1",
-    //       },
-    //       {
-    //         id: "7",
-    //         assigneeId: "9",
-    //         title: "Reimbursement Processing",
-    //         description:
-    //           "Process reimbursement requests from clients and employees.",
-    //         status: "Reimbursement",
-    //         taskColumn: "1",
-    //         dueDate: new Date("10-07-2023"),
-    //         projectId: "1",
-    //         reporterId: "1",
-    //       },
-    //     ],
-    //   },
-    //   {
-    //     id: "2",
-    //     title: "Escalated",
-    //     tasks: [
-    //       {
-    //         id: "2",
-    //         assigneeId: "6",
-    //         title: "Resource Allocation",
-    //         description:
-    //           "Allocate necessary resources for the campaign implementation.",
-    //         status: "Asset Allocation",
-    //         taskColumn: "2",
-    //         dueDate: new Date("09-30-2023"),
-    //         projectId: "1",
-    //         reporterId: "1",
-    //       },
-    //       {
-    //         id: "8",
-    //         assigneeId: "10",
-    //         title: "Client Request Handling",
-    //         description:
-    //           "Handle client's request for additional features and services.",
-    //         status: "Client Request",
-    //         taskColumn: "2",
-    //         dueDate: new Date("10-02-2023"),
-    //         projectId: "1",
-    //         reporterId: "1",
-    //       },
-    //     ],
-    //   },
-    //   {
-    //     id: "3",
-    //     title: "Resolved",
-    //     tasks: [
-    //       {
-    //         id: "9",
-    //         assigneeId: "11",
-    //         title: "Marketing Analytics",
-    //         description:
-    //           "Analyze marketing campaign performance and provide insights.",
-    //         status: "Marketing",
-    //         taskColumn: "3",
-    //         dueDate: new Date("10-15-2023"),
-    //         projectId: "1",
-    //         reporterId: "1",
-    //       },
-    //     ],
-    //   },
-    // ]);
   };
 
   //USE USEEFFECT TO SYNC BOARD COLUMNS DATA TO THE DATABASE
@@ -311,6 +227,7 @@ export default function ProjectDetailKanbanBoard({ columns, projectId }) {
           isOpen={showEditTaskModal}
           onClose={() => setShowEditTaskModal(false)}
           selectedTask={selectedTask}
+          onSave={handleUpdateTask}
         />
       )}
     </DragDropContext>

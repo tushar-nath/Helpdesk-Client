@@ -63,7 +63,7 @@ const CreateTask = ({ onClose, onSave }) => {
       .catch((error) => {
         setError("An error occurred while saving the task.");
         setLoading(false);
-        showToast.error(`Couldn't create task. Please try again later! `, 400);
+        showToast.error(`Couldn't create task. Please try again later! `, 3000);
         console.error(error);
       });
   };

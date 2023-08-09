@@ -36,32 +36,28 @@ const EditTaskModal = ({ isOpen, onClose, selectedTask, onSave }) => {
       description,
       status,
       dueDate,
+      ticketId: selectedTask.id,
     };
 
     // Make the API call to update the task
-    fetch(`${base_url}/api/v1/tickets/${selectedTask.id}`, {
-      method: "PUT",
+    fetch(`${base_url}/api/v1/tickets/update`, {
+      method: "PATCH",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(updatedTask),
     })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Failed to update the task.");
-        }
-        return response.json();
-      })
-      .then((updatedTaskData) => {
-        setLoading(false);
-        onSave(updatedTaskData);
+      .then((response) => response.json())
+      .then((data) => {
         showToast.success("Task updated successfully!");
+        setLoading(false);
         onClose();
+        onSave(data);
       })
       .catch((error) => {
         setError("An error occurred while updating the task.");
         setLoading(false);
-        showToast.error("Couldn't update task. Please try again later!", 400);
+        showToast.error("Couldn't update task. Please try again later!", 3000);
         console.error(error);
       });
   };
