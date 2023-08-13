@@ -2,16 +2,19 @@ import React, { useState } from "react";
 import Modal from "react-modal";
 import { ClipLoader } from "react-spinners";
 import { showToast } from "react-next-toast";
+import { useUserContext } from "../contexts/UserContext";
 
 const base_url = process.env.REACT_APP_API_BASE_URL;
 
 const EditTaskModal = ({ isOpen, onClose, selectedTask, onSave }) => {
+  const { user, setUser } = useUserContext();
   const [title, setTitle] = useState(selectedTask.title);
   const [description, setDescription] = useState(selectedTask.description);
   const [status, setStatus] = useState(selectedTask.status);
   const [dueDate, setDueDate] = useState(selectedTask.dueDate);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [newComment, setNewComment] = useState("");
   const ticketTypes = [
     "Grievance",
     "Reimbursement",
@@ -22,6 +25,7 @@ const EditTaskModal = ({ isOpen, onClose, selectedTask, onSave }) => {
     "Marketing",
   ];
 
+  console.log(selectedTask);
   const formatDate = (dateString) => {
     const options = { year: "numeric", month: "long", day: "numeric" };
     return new Date(dateString).toLocaleDateString(undefined, options);
@@ -48,6 +52,8 @@ const EditTaskModal = ({ isOpen, onClose, selectedTask, onSave }) => {
       status,
       dueDate,
       ticketId: selectedTask.id,
+      comment: newComment,
+      username: user.name
     };
 
     // Make the API call to update the task
@@ -143,6 +149,39 @@ const EditTaskModal = ({ isOpen, onClose, selectedTask, onSave }) => {
         ) : (
           <p onClick={() => setIsDescriptionEditable(true)}>{description}</p>
         )}
+      </div>
+      <div className="mb-4">
+        <p className="font-bold mb-2">Comments:</p>
+        {selectedTask.comments.length === 0 ? (
+          <p>No comments...</p>
+        ) : (
+          <ul className="mb-2">
+            {selectedTask.comments.map((comment, index) => (
+              <li key={index} className="mb-2">
+                <div className="flex flex-col">
+                  <div className="flex justify-between">
+                    <span className="font-semibold text-md">
+                      {comment.username}
+                    </span>
+                    <span className="text-gray-500 text-sm">
+                      {new Date(comment.createdAt).toLocaleString()}
+                    </span>
+                  </div>
+                  <p className="ml-4">{comment.comment}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+      <div className="mb-4">
+        <input
+          type="text"
+          placeholder="Add a comment..."
+          value={newComment}
+          onChange={(e) => setNewComment(e.target.value)}
+          className="w-full rounded-md px-4 py-2 border border-gray-300 placeholder-gray-400 focus:outline-none focus:ring focus:border-blue-500"
+        />
       </div>
       <button
         className="rounded-[5px] bg-[#141414] text-white py-2 px-4 rounded-md mr-2"
